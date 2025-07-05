@@ -1,0 +1,379 @@
+html,
+body,
+main {
+  --font: "skolar-sans-latin", sans-serif;
+  --really-green: oklch(88.14% 0.203 158.82);
+  --green: oklch(78.59% 0.18 159.1);
+  --black: oklch(22.21% 0 0);
+  --gray: oklch(83.9% 0 0);
+  --speed: 1200ms;
+
+  height: 100%;
+  font-family: var(--font);
+  background-color: var(--black);
+  color: var(--gray);
+
+  & * {
+    font-family: inherit;
+  }
+}
+
+main {
+  display: grid;
+  place-content: center;
+  place-items: center;
+  text-align: center;
+  gap: 88px;
+
+  & article {
+    display: grid;
+    gap: 52px;
+  }
+
+  & h1 {
+    color: var(--green);
+    font-size: 14vw;
+    font-weight: 900;
+  }
+
+  & h2 {
+    font-size: 4.5vw;
+    text-transform: uppercase;
+    letter-spacing: 0.025ch;
+  }
+}
+
+*[letter-animation="breath"] {
+  & > span {
+    display: inline-block;
+    white-space: break-spaces;
+  }
+
+  & > span {
+    animation: breath calc(var(--speed)) ease calc(var(--index) * 100 * 1ms)
+      infinite alternate;
+  }
+}
+
+section {
+  width: 100%;
+  display: grid;
+  place-content: center;
+  place-items: center;
+
+  & div {
+    width: 50vw;
+
+    & span {
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.025ch;
+      position: relative;
+      margin-block-end: 8px;
+    }
+
+    & span:first-of-type {
+      float: left;
+      left: -12px;
+    }
+
+    & span:last-of-type {
+      float: right;
+      right: -12px;
+    }
+  }
+
+  & input[type="range"] {
+    width: 100%;
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--green);
+  height: 0.5rem;
+  border-radius: 12px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -12px;
+  background-color: oklch(22.21% 0 0);
+  border: 1px solid oklch(38% 0 0);
+  border-radius: 8px;
+  height: 2rem;
+  width: 1.25rem;
+}
+
+@keyframes breath {
+  from {
+    animation-timing-function: ease-out;
+  }
+  to {
+    transform: scale(1.25) translateY(-5px) perspective(1px);
+    text-shadow: 0 0 20px var(--really-green);
+    animation-timing-function: ease-in-out;
+  }
+}
+
+
+
+
+
+
+
+
+
+/*lets do it play*/
+
+// The following would be the same font as the inspiration tweet,
+// but I like Mona Sans better for now :D 
+// I still keep the gfont url just in case
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+
+@font-face {
+  font-family: "Mona Sans";
+  src: url("https://assets.codepen.io/64/Mona-Sans.woff2")
+      format("woff2 supports variations"),
+    url("https://assets.codepen.io/64/Mona-Sans.woff2")
+      format("woff2-variations");
+  font-weight: 100 1000;
+}
+
+:root {
+  --icon-scale: 0;
+  --icon-rotation: 0;
+  --icon-opacity: 0;
+
+  --color-pale-pink: hsl(272 16% 56.99%);
+  --color-dark-purple: hsl(269.35 100% 21%);
+  --color-light-purple: hsl(269.99 100% 40%);
+  --color-bubblegum-pink: hsl(300deg 97% 68%);
+}
+
+@supports (color: color(display-p3 0 0 0)) {
+  :root {
+    --color-pale-pink: color(display-p3 0.56 0.5 0.63);
+    --color-dark-purple: color(display-p3 0.19 0.01 0.41);
+    --color-light-purple: color(display-p3 0.37 0.01 0.78);
+    --color-bubblegum-pink: color(display-p3 0.94 0.36 1);
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  outline: calc(var(--debug) * 1px) dotted
+    hsl(calc(var(--debug) * 10 * 1deg) 60% 60%);
+}
+
+html,
+body,
+main {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: hsl(271deg 100% 96%);
+  font-family: "Mona Sans", sans-serif;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  
+  --color-mix: color-mix(
+        in lch,
+        var(--color-bubblegum-pink) 60%,
+        var(--color-dark-purple)
+      );
+
+  & button {
+    all: unset;
+    cursor: pointer;
+    font-size: 3em;
+    font-weight: 1000;
+    color: white;
+    position: relative;
+    transition: transform .2s ease;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      
+       background: linear-gradient(
+          to bottom right,
+          var(--color-pale-pink),
+          var(--color-pale-pink)
+        );
+      transform: scale(0.9);
+      outline: 0px solid var(--color-light-purple);
+      border-radius: 1e5px;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    span:nth-child(2) {
+      position: relative;
+      padding: 0.5em 1.2em;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      display: block;
+      border-radius: 1e5px;
+      transition: transform 0.2s ease;
+
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: var(--icon-opacity);
+        transform: scale(var(--icon-scale))
+          rotate(calc(var(--icon-rotation) * -1deg));
+        transition: transform 0.2s ease, opacity .2s ease,
+          --icon-rotation 0.4s cubic-bezier(.02,1.02,.67,1.06);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      &:before {
+        width: 2.1em;
+        top: -0.8em;
+        left: -0.8em;
+        background: url(https://assets.codepen.io/64/heart+%286%29+%281%29.png)
+          no-repeat center center / contain;
+        z-index: -1;
+         filter:  drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+
+      &:after {
+        width: 1.2em;
+        top: 1em;
+        left: 0.5em;
+        background: url(https://assets.codepen.io/64/heart+%285%29+%281%29.png)
+          no-repeat center center / contain;
+        filter: blur(2px) drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+    }
+    
+   
+    span:nth-child(1) {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent;
+
+      &:before,
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 5;
+        transform: scale(var(--icon-scale))
+          rotate(calc(var(--icon-rotation) * -1deg));
+        transition: transform 0.2s ease, opacity .2s ease,
+          --icon-rotation 0.4s cubic-bezier(.02,1.02,.67,1.06);
+        pointer-events: none;
+       
+      }
+
+      &:before {
+        width: 1.75em;
+        top: -1em;
+        right: 0.5em;
+        background: url(https://assets.codepen.io/64/heart+%283%29+%281%29.png)
+          no-repeat center center / contain;
+        filter: blur(1px) drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+
+      &:after {
+        width: 2em;
+        top: 1em;
+        right: -0.5em;
+        background: url(https://assets.codepen.io/64/heart+%284%29+%281%29.png)
+          no-repeat center center / contain;
+         filter:  drop-shadow(0 2px 4px rgb(0 0 0 / 20%)) saturate(150%);
+      }
+    }
+
+    &:hover {
+      --icon-scale: 1;
+      --icon-rotation: 0;
+      --icon-opacity: 1;
+      
+
+      &:before {
+        transform: scale(1.05);
+        background: linear-gradient(
+          to bottom right,
+          var(--color-dark-purple),
+          var(--color-light-purple)
+        );
+        box-shadow: 0 4px 22px -8px var(--color-mix);
+      }
+
+      & > span:nth-child(2) {
+        transform: scale(0.95);
+      }
+      
+      &:active {
+        --icon-scale: 0.8;
+        --icon-rotation: 20;
+
+        transform: scale(1.05);
+
+        &:before {
+          box-shadow: 0 2px 12px var(--color-mix);
+        }
+
+        span:before,
+        span:after {
+          transition-delay: 0s;
+        }
+
+        span:nth-child(odd):before,
+        span:nth-child(even):before {
+          --icon-rotation: -20;
+        }
+
+        span:nth-child(odd):after,
+        span:nth-child(even):after {
+          --icon-rotation: 20;
+        }
+
+        &:before {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+}
+
